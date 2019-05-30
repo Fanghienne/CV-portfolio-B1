@@ -1,3 +1,38 @@
+<?php
+try
+{
+    $bdd = new PDO('pgsql:host=localhost;dbname=Portfolio', 'postgres', 'LindseyStirling', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}
+catch (Exception $e)
+{
+    die('Erreur : ' . $e->getMessage());
+}
+
+$sth1 = $bdd->query('SELECT * FROM admin.admin');
+$row1 = $sth1->fetch(PDO::FETCH_ASSOC);
+
+$sth2 = $bdd->query('SELECT * FROM admin.comp');
+$row2 = $sth2->fetch(PDO::FETCH_ASSOC);
+
+$sth3 = $bdd->query('SELECT * FROM admin.contact');
+$row3 = $sth3->fetch(PDO::FETCH_ASSOC);
+
+$sth4 = $bdd->query('SELECT * FROM admin.exp');
+$row4 = $sth4->fetch(PDO::FETCH_ASSOC);
+
+$sth5 = $bdd->query('SELECT * FROM admin.form');
+$row5 = $sth5->fetch(PDO::FETCH_ASSOC);
+
+$sth6 = $bdd->query('SELECT * FROM admin.interet');
+$row6 = $sth6->fetch(PDO::FETCH_ASSOC);
+
+$sth7 = $bdd->query('SELECT * FROM admin.profil');
+$row7 = $sth7->fetch(PDO::FETCH_ASSOC);
+
+$sth8 = $bdd->query('SELECT * FROM admin.projet');
+$row8 = $sth8->fetch(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +88,7 @@
           <a class="nav-link js-scroll-trigger" href="#interests">Centres d'intérêts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="contact.html">Contactez-moi</a>
+          <a class="nav-link js-scroll-trigger" href="contact.php">Contactez-moi</a>
         </li>
       </ul>
     </div>
@@ -63,13 +98,15 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
       <div class="w-100">
-        <h1 class="mb-0">Labille
-          <span class="text-primary">Auriane</span>
+        <h1 class="mb-0"><?=$row7['nom_profil']?>
+          <span class="text-primary"><?php echo $_POST['prénom'];?></span>
         </h1>
-        <div class="subheading mb-5">16 Boulevard du Tertre · 44800, Saint Herblain · 07 89 69 65 26 ·
-          <a href="mailto:auriane.labille@ynov.com">auriane.labille@ynov.com</a>
+        <div class="subheading mb-5"><?php echo $_POST['rue'];?> · <?php echo $_POST['postale'];?> · <?php echo $_POST['phone'];?> ·
+          <a href="mailto:auriane.labille@ynov.com"><?php echo $_POST['mail'];?></a>
         </div>
-        <p class="lead mb-5">Actuellement étudiante en informatique âgée de 18 ans, je débute dans le monde du travail avec dynamisme.<?php echo $_POST['text'];?></p>
+          <div>
+            <p class="lead mb-5"><?php echo $_POST['présentation'];?></p>
+          </div>
         <div class="social-icons">
           <a href="https://www.linkedin.com/in/auriane-labille-636198176/" target="_blank">
             <i class="fab fa-linkedin-in"></i>
@@ -94,28 +131,15 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">Vendeuse préparatrice</h3>
-            <div class="subheading mb-3">Le Fournil de Pierre</div>
-            <p>Préparations des commandes et vente</p>
+            <h3 class="mb-0"><?php echo $_POST['poste'];?></h3>
+            <div class="subheading mb-3"><?php echo $_POST['lieu'];?></div>
+            <p><?php echo $_POST['emploi'];?></p>
           </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary">Mai 2019 - Aujourd'hui</span>
+            <span class="text-primary"><?php echo $_POST['début'];?> - <?php echo $_POST['fin'];?></span>
           </div>
         </div>
-
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-          <div class="resume-content">
-            <h3 class="mb-0">Boulangerie - Pâtisserie</h3>
-            <div class="subheading mb-3">La Ronde (17)</div>
-            <p>Stage de découverte de la vie professionnelle : observation et réalisatios de pâtisseries</p>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">2015</span>
-          </div>
-        </div>
-
       </div>
-
     </section>
 
 
@@ -125,26 +149,14 @@
 
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
           <div class="resume-content">
-            <h3 class="mb-0">Ynov campus Nantes</h3>
-            <div class="subheading mb-3">Bachelor 1 Ingésup</div>
-            <div>Diplôme d'Expert Informatique et Systèmes d’Information, enregistré au Répertoire National de la Certification Professionnelle (RNCP- code 24881) au niveau I, le plus haut niveau</div>
+            <h3 class="mb-0"><?php echo $_POST['school'];?></h3>
+            <div class="subheading mb-3"><?php echo $_POST['diplôme'];?></div>
+            <div><?php echo $_POST['formation'];?></div>
           </div>
           <div class="resume-date text-md-right">
-            <span class="text-primary">2018 - 2019</span>
+            <span class="text-primary"><?php echo $_POST['début1'];?> - <?php echo $_POST['fin1'];?></span>
           </div>
         </div>
-
-        <div class="resume-item d-flex flex-column flex-md-row justify-content-between">
-          <div class="resume-content">
-            <h3 class="mb-0">Lycée Nicolas Appert</h3>
-            <div class="subheading mb-3">Baccalauréat technologique</div>
-            <div>Série SCIENCES ET TECHNOLOGIES DE L'INDUSTRIE ET DU DÉVELOPPEMENT DURALE, spécialité SYSTÈME D'INFORMATION ET NUMÉRIQUE, Mention ASSEZ BIEN</div>
-          </div>
-          <div class="resume-date text-md-right">
-            <span class="text-primary">2016 - 2018</span>
-          </div>
-        </div>
-
       </div>
     </section>
 
@@ -179,16 +191,7 @@
         <ul class="fa-ul mb-0">
           <li>
             <i class="fa-li fa fa-check"></i>
-            Rigueur</li>
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Polyvalence</li>
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Travail d'équipe</li>
-          <li>
-            <i class="fa-li fa fa-check"></i>
-            Anglais (B1) &amp; Espagnol (A2)</li>
+            <?php echo $_POST['soft'];?></li>
         </ul>
       </div>
     </section>
@@ -200,48 +203,14 @@
           
         <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
               <div class="resume-content">
-                  <h3 class="mb-0">Projet Ydays Univership</h3>
-                  <div class="subheading mb-3">Ynov Campus Nantes</div>
-                  <p>Conception et réalisation d'un site internet</p>
+                  <h3 class="mb-0">Projet <?php echo $_POST['projet'];?></h3>
+                  <div class="subheading mb-3"><?php echo $_POST['lieu1'];?></div>
+                  <p><?php echo $_POST['description'];?></p>
               </div>
               <div class="resume-date text-md-right">
-                  <span class="text-primary">2018 - 2019</span>
+                  <span class="text-primary"><?php echo $_POST['début2'];?> - <?php echo $_POST['fin2'];?></span>
               </div>
-          </div>
-          
-          <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-              <div class="resume-content">
-                  <h3 class="mb-0">Projet Inventaire+</h3>
-                  <div class="subheading mb-3">Ynov Campus Nantes</div>
-                  <p>Infrastructure des SI</p>
-              </div>
-              <div class="resume-date text-md-right">
-                  <span class="text-primary">2018 - 2019</span>
-              </div>
-          </div>
-          
-          <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-              <div class="resume-content">
-                  <h3 class="mb-0">Projet plante connectée</h3>
-                  <div class="subheading mb-3">Ynov Campus Nantes</div>
-                  <p>Developpement logiciel</p>
-              </div>
-              <div class="resume-date text-md-right">
-                  <span class="text-primary">2018 - 2019</span>
-              </div>
-          </div>
-          
-          <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-              <div class="resume-content">
-                  <h3 class="mb-0">Projet Portfolio</h3>
-                  <div class="subheading mb-3">Ynov Campus Nantes</div>
-                  <p>Technologies Web</p>
-              </div>
-              <div class="resume-date text-md-right">
-                  <span class="text-primary">2018 - 2019</span>
-              </div>
-          </div>
-          
+          </div>  
       </div>
     </section>
 
@@ -249,39 +218,16 @@
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="interests">
       <div class="w-100">
         <h2 class="mb-5">Centres d'intérêts</h2>
-          
           <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
               <div class="resume-content">
-                  <h3 class="mb-0">Jeux vidéos</h3>
+                  <h3 class="mb-0"><?php echo $_POST['domaine'];?></h3>
+                  <div class="subheading mb-3"><?php echo $_POST['lieu2'];?></div>
+                  <p><?php echo $_POST['loisir'];?></p>
               </div>
               <div class="resume-date text-md-right">
-                  <span class="text-primary">2012 - Aujourd'hui</span>
+                  <span class="text-primary"><?php echo $_POST['début3'];?> - <?php echo $_POST['fin3'];?></span>
               </div>
           </div>
-          
-          <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-              <div class="resume-content">
-                  <h3 class="mb-0">Danse</h3>
-                  <div class="subheading mb-3">Saint Herblain</div>
-                  <p>Rock, West Coast Swing</p>
-              </div>
-              <div class="resume-date text-md-right">
-                  <span class="text-primary">2015 - 2016</span>
-              </div>
-          </div>
-          
-          <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-              <div class="resume-content">
-                  <h3 class="mb-0">Patin à roulettes artistique</h3>
-                  <div class="subheading mb-3">Cercles des patineurs Courçonnais (17)</div>
-                  <p>Diplômée Patin de Bronze
-                  <br/>Galas, compétition</p>
-              </div>
-              <div class="resume-date text-md-right">
-                  <span class="text-primary">2010 - 2015</span>
-              </div>
-          </div>
-        
       </div>
     </section>
 
