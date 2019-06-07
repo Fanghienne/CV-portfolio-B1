@@ -1,3 +1,14 @@
+<?php
+try
+{
+    $bdd = new PDO('pgsql:host=localhost;dbname=Portfolio', 'postgres', 'LindseyStirling', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}
+catch (Exception $e)
+{
+    die('Erreur : ' . $e->getMessage());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,25 +46,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Profil</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Profil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Expériences</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Expériences</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Formations</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Formations</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Compétences</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Compétences</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Projets</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Projets</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Centres d'intérêts</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Centres d'intérêts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="contact.html">Contactez-moi</a>
+          <a class="nav-link js-scroll-trigger" href="contact.php">Contactez-moi</a>
         </li>
       </ul>
     </div>

@@ -1,3 +1,37 @@
+<?php
+try
+{
+    $bdd = new PDO('pgsql:host=localhost; dbname=Portfolio', 'postgres', 'LindseyStirling', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}
+catch (Exception $e)
+{
+    die('Erreur : ' . $e->getMessage());
+}
+$sth1 = $bdd->query('SELECT * FROM admin.admin');
+$row1 = $sth1->fetch(PDO::FETCH_ASSOC);
+
+$sth2 = $bdd->query('SELECT * FROM admin.comp');
+$row2 = $sth2->fetch(PDO::FETCH_ASSOC);
+
+$sth3 = $bdd->query('SELECT * FROM admin.contact');
+$row3 = $sth3->fetch(PDO::FETCH_ASSOC);
+
+$sth4 = $bdd->query('SELECT * FROM admin.exp');
+$row4 = $sth4->fetch(PDO::FETCH_ASSOC);
+
+$sth5 = $bdd->query('SELECT * FROM admin.form');
+$row5 = $sth5->fetch(PDO::FETCH_ASSOC);
+
+$sth6 = $bdd->query('SELECT * FROM admin.interet');
+$row6 = $sth6->fetch(PDO::FETCH_ASSOC);
+
+$sth7 = $bdd->query('SELECT * FROM admin.profil');
+$row7 = $sth7->fetch(PDO::FETCH_ASSOC);
+
+$sth8 = $bdd->query('SELECT * FROM admin.projet');
+$row8 = $sth8->fetch(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,28 +69,28 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Profil</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Profil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Expériences</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Expériences</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Formations</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Formations</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Compétences</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Compétences</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Projets</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Projets</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="index.html">Centres d'intérêts</a>
+          <a class="nav-link js-scroll-trigger" href="index.php">Centres d'intérêts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="contact.html">Contactez-moi</a>
+          <a class="nav-link js-scroll-trigger" href="contact.php">Contactez-moi</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="admin.html">Paramètres</a>
+          <a class="nav-link js-scroll-trigger" href="admin.php">Paramètres</a>
         </li>
       </ul>
     </div>
@@ -68,7 +102,7 @@
       <div class="w-100">
         <h2 class="mb-5">Paramètres</h2>
         
-          <form method="post" enctype="multipart/form-data" action="index.php">
+          <form method="post" enctype="multipart/form-data" action="admin.php">
             <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
               <div class="resume-content">
                 <h3 class="mb-5">Présentation simple</h3>
@@ -76,15 +110,20 @@
                     <input type="file" accept="image/*"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="text" placeholder="Nom"/>
+                    <input type="text" name="nom" placeholder="Nom & prénom"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="text" placeholder="Prénom"/>
+                    <input type="text" name="rue" placeholder="Rue"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="text" placeholder="Coordonnées"/>
-                </div>                
-
+                    <input type="text" name="postale" placeholder="Code postale & ville"/>
+                </div>
+                <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
+                    <input type="text" name="phone" placeholder="Téléphone"/>
+                </div>
+                <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
+                    <input type="text" name="mail" placeholder="Adresse mail"/>
+                </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
                     <textarea id="text" name="présentation" placeholder="Entrez une description..." rows="5" cols="50"></textarea>
                 </div>
@@ -102,52 +141,58 @@
                   
                 <div class="subheading mb-3">Expériences professionnelles</div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Poste"/>
+                    <input type="texte" name="poste" placeholder="Poste"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Lieu"/>
+                    <input type="texte" name="lieu" placeholder="Lieu"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Dates de fin & début"/>
+                    <input type="texte" name="début" placeholder="Date de début"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <textarea id="text" name="text" placeholder="Entrez une description..." rows="5" cols="50"></textarea>
+                    <input type="texte" name="fin" placeholder="Date de fin"/>
+                </div>
+                <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
+                    <textarea id="text" name="emploi" placeholder="Entrez une description..." rows="5" cols="50"></textarea>
                 </div>
                   
                 <div class="subheading mb-3">Parcours scolaire</div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="École"/>
+                    <input type="texte" name="school" placeholder="École"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Formation"/>
+                    <input type="texte" name="diplôme" placeholder="Formation"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Dates de fin & début"/>
+                    <input type="texte" name="début1" placeholder="Date de début"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <textarea id="text" name="text" placeholder="Entrez une description..." rows="5" cols="50"></textarea>
+                    <input type="texte" name="fin1" placeholder="Date de fin"/>
+                </div>
+                <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
+                    <textarea id="text" name="formation" placeholder="Entrez une description..." rows="5" cols="50"></textarea>
                 </div>
                   
                 <div class="subheading mb-3">Compétences</div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Informatique"/>
-                </div>
-                <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Soft skill"/>
+                    <input type="texte" name="soft" placeholder="Soft skill"/>
                 </div>
                   
                 <div class="subheading mb-3">Centres d'intérêts</div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Domaine"/>
+                    <input type="texte" name="domaine" placeholder="Domaine"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Lieu"/>
+                    <input type="texte" name="lieu2" placeholder="Lieu"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Dates de fin & début"/>
+                    <input type="texte" name="début3" placeholder="Date de début"/>
+                </div>
+                <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
+                    <input type="texte" name="fin3" placeholder="Date de fin"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                    <textarea id="text" name="text" placeholder="Entrez une description..." rows="5" cols="50"></textarea>
+                    <textarea id="text" name="loisir" placeholder="Entrez une description..." rows="5" cols="50"></textarea>
                 </div>
                   
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
@@ -160,16 +205,19 @@
               <div class="resume-content">
                 <h3 class="mb-5">Réalisations / projets</h3>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Nom du projet"/>
+                    <input type="texte" name="projet" placeholder="Nom du projet"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Lieu"/>
+                    <input type="texte" name="lieu1" placeholder="Lieu"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
-                    <input type="texte" placeholder="Dates de fin & début"/>
+                    <input type="texte" name="début2" placeholder="Date de début"/>
+                </div>
+                <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-3">
+                    <input type="texte" name="fin2" placeholder="Date de fin"/>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
-                    <textarea id="text" name="text" placeholder="Entrez une description..." rows="5" cols="50"></textarea>
+                    <textarea id="text" name="description" placeholder="Entrez une description..." rows="5" cols="50"></textarea>
                 </div>
                 <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
                     <input type="submit" value="Envoyer"/>
